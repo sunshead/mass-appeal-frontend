@@ -40,7 +40,7 @@ class CampaignAPI {
       });
   }
 
-  static getCampaigns() {
+  static fetchCampaigns() {
     return fetch(`${MassAppealAPIDomain}/api/campaigns`, {
       method: 'GET',
       headers: acceptContentTypeHeadersV1,
@@ -58,7 +58,7 @@ class CampaignAPI {
         if (body.campaigns) {
           return body.campaigns;
         } else {
-          throw new Error('Unable to get campaigns.');
+          throw new Error('Unable to fetch campaigns.');
         }
       });
   }

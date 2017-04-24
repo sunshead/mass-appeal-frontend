@@ -10,6 +10,9 @@ const FETCH_CAMPAIGNS_REQUEST_FAILURE = 'FETCH_CAMPAIGNS_REQUEST_FAILURE';
 const SAVE_CAMPAIGN_REQUEST = 'SAVE_CAMPAIGN_REQUEST';
 const SAVE_CAMPAIGN_REQUEST_SUCCESS = 'SAVE_CAMPAIGN_REQUEST_SUCCESS';
 const SAVE_CAMPAIGN_REQUEST_FAILURE = 'SAVE_CAMPAIGN_REQUEST_FAILURE';
+const DELETE_CAMPAIGN_REQUEST = 'DELETE_CAMPAIGN_REQUEST';
+const DELETE_CAMPAIGN_REQUEST_SUCCESS = 'DELETE_CAMPAIGN_REQUEST_SUCCESS';
+const DELETE_CAMPAIGN_REQUEST_FAILURE = 'DELETE_CAMPAIGN_REQUEST_FAILURE';
 
 const fetchCampaignRequest = () => ({
   type: FETCH_CAMPAIGN_REQUEST,
@@ -52,7 +55,7 @@ const fetchCampaigns = () =>
     dispatch(fetchCampaignsRequest());
 
     return backendAPI
-      .getCampaigns()
+      .fetchCampaigns()
       .then(
         data => dispatch(fetchCampaignsRequestSuccess()),
         error => dispatch(fetchCampaignsRequestFailure()),
@@ -84,14 +87,36 @@ const saveCampaign = data =>
       );
   };
 
+const deleteCampaignRequest = () => ({
+  type: DELETE_CAMPAIGN_REQUEST,
+});
+
+const deleteCampaignRequestSuccess = data => ({
+  type: DELETE_CAMPAIGN_REQUEST_SUCCESS,
+  data,
+});
+
+const deleteCampaignRequestFailure = () => ({
+  type: DELETE_CAMPAIGN_REQUEST_FAILURE,
+});
+
+const deleteCampaign = data =>
+  dispatch => {
+    dispatch(deleteCampaignRequest());
+
+    return backendAPI
+      .deleteCampaign(data)
+      .then(
+        data => dispatch(deleteCampaignRequestSuccess(data)),
+        error => dispatch(deleteCampaignRequestFailure()),
+      );
+  };
+
 const initialState = {
   data: {
     requestFailed: false,
     campaigns: [],
     campaign: {},
-    pledges: [],
-    pledge: {},
-    totalAmountPledged: 0,
   },
 };
 
@@ -115,9 +140,19 @@ let data = (state = initialState.data, action) => {
         requestFailed: false,
       });
 
+    case DELETE_CAMPAIGN_REQUEST_SUCCESS:
+      let campaigns = state.campaigns.filter(
+        campaign => campaign.id !== action.campaignId,
+      );
+      return Object.assign({}, state, {
+        campaigns,
+        requestFailed: false,
+      });
+
     case FETCH_CAMPAIGN_REQUEST_FAILURE:
     case SAVE_CAMPAIGN_REQUEST_FAILURE:
     case SAVE_USER_REQUEST_FAILURE:
+    case DELETE_CAMPAIGN_REQUEST_FAILURE:
       return Object.assign({}, state, {
         requestFailed: true,
       });
