@@ -18,7 +18,7 @@ const Header = ({ currentUser, onLogOutClick }) => (
           <span className="icon-bar" />
           <span className="icon-bar" />
         </button>
-        <Link to="/" className="navbar-brand">Brand</Link>
+        <Link to="/" className="navbar-brand">Mass Appeal</Link>
       </div>
 
       <div
