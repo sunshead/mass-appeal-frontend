@@ -13,6 +13,7 @@ class CampaignPanel extends Component {
     );
     let campaignCards = filteredCampaigns.map(campaign => (
       <CampaignCard
+        id={campaign.id}
         creator_id={campaign.creator_id}
         name={campaign.name}
         goal_amount_in_cents={campaign.goal_amount_in_cents}

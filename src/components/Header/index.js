@@ -19,20 +19,22 @@ const Header = ({ currentUser, onLogOutClick }) => (
           <span className="icon-bar" />
         </button>
         <Link to="/" className="navbar-brand">Mass Appeal</Link>
+        <Link to="/campaigns" className="navbar-brand navbar-campaigns">
+          Campaigns
+        </Link>
       </div>
 
       <div
         className="collapse navbar-collapse"
         id="bs-example-navbar-collapse-1"
       >
-        <ul className="nav navbar-nav navbar-right">
-          <li><Link to="/private">Private</Link></li>
-          <li>
-            {currentUser
-              ? <Link onClick={onLogOutClick} to="/">Log Out</Link>
-              : <Link to="/login">Log In</Link>}
-          </li>
-        </ul>
+        <div className="nav navbar-nav navbar-right">
+          {currentUser
+            ? <div>
+                <a className="navbar-username">{currentUser.email}</a>
+              </div>
+            : <Link to="/login">Log In</Link>}
+        </div>
       </div>
     </div>
   </nav>

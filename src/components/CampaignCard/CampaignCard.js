@@ -19,17 +19,38 @@ class CampaignCard extends Component {
 
   render() {
     return (
-      <div>
-        {this.props.creator_id}
-        ,
-        {' '}
-        {this.props.name}
-        ,
-        {' '}
-        {this.props.goal_amount_in_cents}
-        ,
-        {' '}
-        {this.props.description}
+      <div className="col s12">
+        <div className="card horizontal">
+          <div className="card-image campaign-image">
+            <img
+              src="https://s3.us-east-2.amazonaws.com/purple-server/users/default_profile_picture/default.png"
+              alt="campaign"
+            />
+          </div>
+          <div className="card-stacked">
+            <div className="row">
+              <div className="col s8">
+                <div className="card-content">
+                  <div className="campaign-title">
+                    {this.props.name}
+                  </div>
+                  <div className="campaign-descritpion">
+                    {this.props.description}
+                  </div>
+                  <p>{this.props.creator_id}</p>
+                  <p>{this.props.goal_amount_in_cents}</p>
+                </div>
+              </div>
+              <div className="col s4">
+                <div className="card-action">
+                  <a className="waves-effect waves-light btn campaign-btn">
+                    Contribute
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     );
   }

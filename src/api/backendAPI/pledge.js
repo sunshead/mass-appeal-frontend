@@ -1,5 +1,5 @@
 // import { bodyHeaders } from 'utilities/apiHeaders.js'
-// import { backendAPIUrl } from 'constants/values'
+import { backendAPIUrl } from 'constants/values';
 
 //TBD
 
@@ -19,7 +19,7 @@ let authorizationHeadersV1 = () => {
 
 class PledgeAPI {
   static savePledge(data) {
-    return fetch(`${MassAppealAPIDomain}/api/pledges/${data.pledgeId}`, {
+    return fetch(`${backendAPIUrl}/api/pledges/${data.pledgeId}`, {
       method: 'POST',
       headers: authorizationHeadersV1(),
     })
@@ -43,7 +43,7 @@ class PledgeAPI {
 
   static fetchPledgesByCampaign(data) {
     return fetch(
-      `${MassAppealAPIDomain}/api/pledges?campaign_id=${data.campaignId}`,
+      `${backendAPIUrl}/api/pledges?campaign_id=${data.campaignId}`,
       {
         method: 'GET',
         headers: authorizationHeadersV1(),
@@ -68,7 +68,7 @@ class PledgeAPI {
   }
 
   static fetchPledgesByUser(data) {
-    return fetch(`${MassAppealAPIDomain}/api/pledges?user_id=${data.userId}`, {
+    return fetch(`${backendAPIUrl}/api/pledges?user_id=${data.userId}`, {
       method: 'GET',
       headers: authorizationHeadersV1(),
     })
@@ -91,7 +91,7 @@ class PledgeAPI {
   }
 
   static deletePledge(data) {
-    return fetch(`${MassAppealAPIDomain}/api/pledges/${data.pledgeId}`, {
+    return fetch(`${backendAPIUrl}/api/pledges/${data.pledgeId}`, {
       method: 'DELETE',
       headers: authorizationHeadersV1(),
     })
@@ -113,3 +113,4 @@ class PledgeAPI {
       });
   }
 }
+export default PledgeAPI;

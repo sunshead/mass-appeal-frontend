@@ -1,5 +1,5 @@
 // import { bodyHeaders } from 'utilities/apiHeaders.js'
-// import { backendAPIUrl } from 'constants/values'
+import { backendAPIUrl } from 'constants/values';
 
 //TBD
 let acceptContentTypeHeadersV1 = {
@@ -18,7 +18,7 @@ let authorizationHeadersV1 = () => {
 
 class CampaignAPI {
   static fetchCampaign() {
-    return fetch(`${MassAppealAPIDomain}/api/campaign/:id`, {
+    return fetch(`${backendAPIUrl}/api/campaign/:id`, {
       method: 'GET',
       headers: authorizationHeadersV1(),
     })
@@ -41,7 +41,7 @@ class CampaignAPI {
   }
 
   static fetchCampaigns() {
-    return fetch(`${MassAppealAPIDomain}/api/campaigns`, {
+    return fetch(`${backendAPIUrl}/api/campaigns`, {
       method: 'GET',
       headers: acceptContentTypeHeadersV1,
     })
@@ -64,7 +64,7 @@ class CampaignAPI {
   }
 
   static updateCampaign(campaign) {
-    return fetch(`${MassAppealAPIDomain}/api/campaign/:id`, {
+    return fetch(`${backendAPIUrl}/api/campaign/:id`, {
       method: 'PATCH',
       headers: authorizationHeadersV1(),
       body: JSON.stringify({ campaign }),
@@ -88,7 +88,7 @@ class CampaignAPI {
   }
 
   static saveCampaign(data) {
-    return fetch(`${MassAppealAPIDomain}/api/campaigns`, {
+    return fetch(`${backendAPIUrl}/api/campaigns`, {
       method: 'POST',
       headers: authorizationHeadersV1(),
       body: data,
@@ -112,7 +112,7 @@ class CampaignAPI {
   }
 
   static savePledge(data) {
-    return fetch(`${MassAppealAPIDomain}/api/pledges/${data.pledgeId}`, {
+    return fetch(`${backendAPIUrl}/api/pledges/${data.pledgeId}`, {
       method: 'POST',
       headers: authorizationHeadersV1(),
     })
@@ -135,7 +135,7 @@ class CampaignAPI {
   }
 
   static deletePledge(data) {
-    return fetch(`${MassAppealAPIDomain}/api/pledges/${data.pledgeId}`, {
+    return fetch(`${backendAPIUrl}/api/pledges/${data.pledgeId}`, {
       method: 'DELETE',
       headers: authorizationHeadersV1(),
     })
@@ -158,7 +158,7 @@ class CampaignAPI {
   }
 
   static deleteCampaign(data) {
-    return fetch(`${MassAppealAPIDomain}/api/campaigns/${data.campaignId}`, {
+    return fetch(`${backendAPIUrl}/api/campaigns/${data.campaignId}`, {
       method: 'DELETE',
       headers: authorizationHeadersV1(),
     })
@@ -180,3 +180,4 @@ class CampaignAPI {
       });
   }
 }
+export default CampaignAPI;

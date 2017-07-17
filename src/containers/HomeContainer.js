@@ -1,63 +1,50 @@
 import React, { Component, PropTypes } from 'react';
 import { connect } from 'react-redux';
 import { currentUser } from 'utilities/selectors';
-import CampaignPanel from '../components/CampaignPanel/CampaignPanel';
-import SearchBar from '../components/SearchBar/SearchBar';
+import Home from '../components/Home/Home';
+import update from 'react-addons-update';
+require('dotenv').config();
 
-let campaigns = [
-  {
-    creator_id: '123',
-    name: 'little a',
-    goal_amount_in_cents: 2000,
-    description: 'awesome',
-  },
-  {
-    creator_id: '234',
-    name: 'little b',
-    goal_amount_in_cents: 3000,
-    description: 'awesome',
-  },
-  {
-    creator_id: '345',
-    name: 'little c',
-    goal_amount_in_cents: 4000,
-    description: 'awesome',
-  },
-  {
-    creator_id: '456',
-    name: 'little d',
-    goal_amount_in_cents: 5000,
-    description: 'awesome',
-  },
-];
+// const {REACT_APP_DOMAIN_URL} = process.env;
+const REACT_APP_DOMAIN_URL = 'http://localhost:3000';
+console.log(process.env);
 
 class HomeContainer extends Component {
   constructor() {
     super();
     this.state = {
-      filterText: '',
+      campaigns: [],
     };
+    this.addCampaign = this.addCampaign.bind(this);
   }
 
-  handleUserInput(searchTerm) {
-    this.setState({ filterText: searchTerm });
+  addCampaign() {
+    let newCampaign = {
+      id: Date.now(),
+      name: 'Coffee Machine',
+      description: 'yoyo',
+    };
+    let nextState = update(this.state.campaigns, { $push: [newCampaign] });
+    this.setState({ campaigns: nextState });
+  }
+
+  componentDidMount() {
+    fetch(`${REACT_APP_DOMAIN_URL}/v1/campaigns`)
+      .then(response => response.json())
+      .then(responseData => {
+        this.setState({ campaigns: responseData['campaigns'] });
+      })
+      .catch(error => {
+        console.log(
+          'Error fetching and parsing data from ' + REACT_APP_DOMAIN_URL,
+          error,
+        );
+      });
   }
 
   render() {
     return (
-      <div>
-        <h1>Home Container Component</h1>
-        {this.props.currentUser &&
-          <span>Sign in as: {this.props.currentUser.email}</span>}
-        <SearchBar
-          filterText={this.state.filterText}
-          onUserInput={this.handleUserInput.bind(this)}
-        />
-        <CampaignPanel
-          campaigns={campaigns}
-          filterText={this.state.filterText}
-        />
-      </div>
+      <Home campaigns={this.state.campaigns} addCampaign={this.addCampaign} />
     );
   }
 }

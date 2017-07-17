@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import backendAPI from '../api/backendAPI';
+import CampaignAPI from '../api/backendAPI/campaign';
 
 const FETCH_CAMPAIGN_REQUEST = 'FETCH_CAMPAIGN_REQUEST';
 const FETCH_CAMPAIGN_REQUEST_SUCCESS = 'FETCH_CAMPAIGN_REQUEST_SUCCESS';
@@ -30,12 +30,10 @@ const fetchCampaign = () =>
   dispatch => {
     dispatch(fetchCampaignRequest());
 
-    return backendAPI
-      .fetchCampaign()
-      .then(
-        data => dispatch(fetchCampaignRequestSuccess()),
-        error => dispatch(fetchCampaignRequestFailure()),
-      );
+    return CampaignAPI.fetchCampaign().then(
+      data => dispatch(fetchCampaignRequestSuccess()),
+      error => dispatch(fetchCampaignRequestFailure()),
+    );
   };
 
 const fetchCampaignsRequest = () => ({
@@ -54,12 +52,10 @@ const fetchCampaigns = () =>
   dispatch => {
     dispatch(fetchCampaignsRequest());
 
-    return backendAPI
-      .fetchCampaigns()
-      .then(
-        data => dispatch(fetchCampaignsRequestSuccess()),
-        error => dispatch(fetchCampaignsRequestFailure()),
-      );
+    return CampaignAPI.fetchCampaigns().then(
+      data => dispatch(fetchCampaignsRequestSuccess()),
+      error => dispatch(fetchCampaignsRequestFailure()),
+    );
   };
 
 const saveCampaignRequest = () => ({
@@ -79,12 +75,10 @@ const saveCampaign = data =>
   dispatch => {
     dispatch(saveCampaignRequest());
 
-    return backendAPI
-      .saveCampaign(data)
-      .then(
-        data => dispatch(saveCampaignRequestSuccess(data)),
-        error => dispatch(saveCampaignRequestFailure()),
-      );
+    return CampaignAPI.saveCampaign(data).then(
+      data => dispatch(saveCampaignRequestSuccess(data)),
+      error => dispatch(saveCampaignRequestFailure()),
+    );
   };
 
 const deleteCampaignRequest = () => ({
@@ -104,12 +98,10 @@ const deleteCampaign = data =>
   dispatch => {
     dispatch(deleteCampaignRequest());
 
-    return backendAPI
-      .deleteCampaign(data)
-      .then(
-        data => dispatch(deleteCampaignRequestSuccess(data)),
-        error => dispatch(deleteCampaignRequestFailure()),
-      );
+    return CampaignAPI.deleteCampaign(data).then(
+      data => dispatch(deleteCampaignRequestSuccess(data)),
+      error => dispatch(deleteCampaignRequestFailure()),
+    );
   };
 
 const initialState = {

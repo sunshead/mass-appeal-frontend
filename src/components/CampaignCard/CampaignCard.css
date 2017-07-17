@@ -1,0 +1,28 @@
+@import '../../constants/colors.scss';
+
+.campaign-image {
+    width: 250px;
+    object-fit: fill;
+}
+
+.card-content {
+    color: $black;
+}
+
+.campaign-title {
+    font-size: 30px;
+    font-weight: 900;
+}
+
+.campaign-description {
+    font-size: 16px;
+    line-height: 1.63;
+}
+
+.campaign-btn {
+    font-family: "Helvetica Neue";
+    font-size: 20px;
+    letter-spacing: 0px !important;
+    text-transform: none !important;
+    background-color: $black !important;
+}

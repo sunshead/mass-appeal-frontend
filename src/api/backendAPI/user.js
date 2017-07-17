@@ -1,5 +1,5 @@
 // import { bodyHeaders } from 'utilities/apiHeaders.js'
-// import { backendAPIUrl } from 'constants/values'
+import { backendAPIUrl } from 'constants/values';
 
 //TBD
 
@@ -9,7 +9,7 @@ let acceptContentTypeHeadersV1 = {
 
 class UserAPI {
   static saveUser(data) {
-    return fetch(`${MassAppealAPIDomain}/api/users`, {
+    return fetch(`${backendAPIUrl}/api/users`, {
       method: 'POST',
     })
       .then(response => {
@@ -30,3 +30,4 @@ class UserAPI {
       });
   }
 }
+export default UserAPI;

@@ -2,11 +2,12 @@ import React, { PropTypes } from 'react';
 import DevTools from 'containers/DevTools';
 import HeaderContainer from 'containers/HeaderContainer';
 import { isDevelopment } from 'constants/values';
+import './styles.scss';
 
 const Layout = ({ children }) => (
-  <div>
+  <div className="layout-container">
     <HeaderContainer />
-    <div className="container">
+    <div>
       {children}
     </div>
     {isDevelopment && <DevTools />}

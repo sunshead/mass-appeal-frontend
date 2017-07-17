@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux';
-import backendAPI from '../api/backendAPI';
+import PledgeAPI from '../api/backendAPI/pledge';
 
 const FETCH_PLEDGES_BY_CAMPAIGN_REQUEST = 'FETCH_PLEDGES_BY_CAMPAIGN_REQUEST';
 const FETCH_PLEDGES_BY_CAMPAIGN_REQUEST_SUCCESS = 'FETCH_PLEDGES_BY_CAMPAIGN_REQUEST_SUCCESS';
@@ -30,12 +30,10 @@ const fetchPledgesByCampaign = () =>
   dispatch => {
     dispatch(fetchPledgesbyCampaignRequest());
 
-    return backendAPI
-      .fetchPledgesByCampaign()
-      .then(
-        data => dispatch(fetchPledgesByCampaignRequestSuccess()),
-        error => dispatch(fetchPledgesByCampaignRequestFailure()),
-      );
+    return PledgeAPI.fetchPledgesByCampaign().then(
+      data => dispatch(fetchPledgesByCampaignRequestSuccess()),
+      error => dispatch(fetchPledgesByCampaignRequestFailure()),
+    );
   };
 
 const fetchPledgesByUserRequest = () => ({
@@ -54,12 +52,10 @@ const fetchPledgesByUser = () =>
   dispatch => {
     dispatch(fetchPledgesbyUserRequest());
 
-    return backendAPI
-      .fetchPledgesByUser()
-      .then(
-        data => dispatch(fetchPledgesByUserRequestSuccess()),
-        error => dispatch(fetchPledgesByUserRequestFailure()),
-      );
+    return PledgeAPI.fetchPledgesByUser().then(
+      data => dispatch(fetchPledgesByUserRequestSuccess()),
+      error => dispatch(fetchPledgesByUserRequestFailure()),
+    );
   };
 
 const savePledgeRequest = () => ({
@@ -79,12 +75,10 @@ const savePledge = data =>
   dispatch => {
     dispatch(savePledgeRequest());
 
-    return backendAPI
-      .savePledge(data)
-      .then(
-        data => dispatch(savePledgeRequestSuccess(data)),
-        error => dispatch(savePledgeRequestFailure()),
-      );
+    return PledgeAPI.savePledge(data).then(
+      data => dispatch(savePledgeRequestSuccess(data)),
+      error => dispatch(savePledgeRequestFailure()),
+    );
   };
 
 const deletePledgeRequest = () => ({
@@ -104,12 +98,10 @@ const deletePledge = data =>
   dispatch => {
     dispatch(deletePledgeRequest());
 
-    return backendAPI
-      .deletePledge(data)
-      .then(
-        data => dispatch(deletePledgeRequestSuccess(data)),
-        error => dispatch(deletePledgeRequestFailure()),
-      );
+    return PledgeAPI.deletePledge(data).then(
+      data => dispatch(deletePledgeRequestSuccess(data)),
+      error => dispatch(deletePledgeRequestFailure()),
+    );
   };
 
 const initialState = {
